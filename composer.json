@@ -1,0 +1,15 @@
+{
+    "name": "inanh86-workstation/zalo-bot",
+    "autoload": {
+        "psr-4": {
+            "Inanh86Workstation\\ZaloBot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "inanh86.com",
+            "email": "inanh86.com@gmail.com"
+        }
+    ],
+    "require": {}
+}
