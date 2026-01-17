@@ -2,6 +2,8 @@
 
 namespace Inanh86\ZaloBot\Admin;
 
+use Inanh86\ZaloBot\Utils\Logger;
+
 /**
  * Class SettingsPage
  * Khởi tạo trang cấu hình và nhúng React app
@@ -14,21 +16,8 @@ class SettingsPage
      */
     public function __construct()
     {
-        add_action('admin_init', [$this, 'redirect_to_onboarding']);
         add_action('admin_menu', [$this, 'add_menu']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
-    }
-
-    /**
-     * Chuyển hướng tới phần cài đặt (Wizard) plugins ngay khi actvie plugins 
-     */
-    public function redirect_to_onboarding(): void
-    {
-        if (get_option('zalo_bot_needs_onboarding')) {
-            delete_option('zalo_bot_needs_onboarding'); // Chỉ chạy 1 lần
-            wp_safe_redirect(admin_url('admin.php?page=zalo-bot-settings'));
-            exit;
-        }
     }
 
     /**
@@ -83,12 +72,15 @@ class SettingsPage
         // Nạp CSS của WordPress Components (bắt buộc để React UI hiển thị đúng)
         wp_enqueue_style('wp-components');
 
+        // Lấy toàn bộ mảng settings (nếu chưa có thì trả về mảng mặc định)
+        $settings = get_option(ZALO_BOT_SETTING_KEY, []);
+
         // Truyền dữ liệu từ Server (PHP) sang Client (React)
         wp_localize_script('zalo-bot-admin', 'zaloBotData', [
-            'status'         => get_option('zalo_bot_status', 'off'),
-            'api_key'        => get_option('zalo_bot_access_token', ''),
-            'webhook_token'  => get_option('zalo_bot_webhook_token', ''),
-            'nonce'          => wp_create_nonce('wp_rest') // Cần thiết để React gọi API bảo mật
+            'status'        => $settings['status'] ?? 'off',
+            'api_key'       => $settings['access_token'] ?? '',
+            'webhook_token' => $settings['webhook_token'] ?? '',
+            'nonce'         => wp_create_nonce('wp_rest')
         ]);
     }
     /**

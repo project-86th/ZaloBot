@@ -2,7 +2,7 @@
     "name": "inanh86-workstation/zalo-bot",
     "autoload": {
         "psr-4": {
-            "Inanh86Workstation\\ZaloBot\\": "src/"
+            "Inanh86\\ZaloBot\\": "src/"
         }
     },
     "authors": [

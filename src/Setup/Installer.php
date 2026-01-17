@@ -2,6 +2,10 @@
 
 namespace Inanh86\ZaloBot\Setup;
 
+use Inanh86\ZaloBot\Utils\Logger;
+
+defined('ABSPATH') || exit;
+
 /**
  * Class Installer
  * * Chịu trách nhiệm thiết lập môi trường cho Plugin khi kích hoạt.
@@ -67,17 +71,25 @@ class Installer
      */
     private static function add_default_options(): void
     {
+        $option_key = ZALO_BOT_SETTING_KEY;
+
+        // Lấy dữ liệu hiện tại từ Database
+        $existing_settings = get_option($option_key);
+
         $defaults = [
-            'zalo_bot_status'        => 'off',                          // Trạng thái hoạt động (on/off)
-            'zalo_bot_webhook_token' => wp_generate_password(32, false), // Mã bảo mật cho Webhook
-            'zalo_bot_version'       => '1.0.0',                        // Phiên bản plugin
-            'zalo_bot_access_token'  => '',                             // Token để gọi API Zalo
+            'status'        => 'off',
+            'webhook_token' => wp_generate_password(32, false),
+            'version'       => '1.0.0',
+            'access_token'  => '',
         ];
 
-        foreach ($defaults as $option => $value) {
-            if (get_option($option) === false) {
-                update_option($option, $value);
-            }
+        // Nếu chưa từng có settings nào, lưu toàn bộ default
+        if ($existing_settings === false) {
+            update_option($option_key, $defaults);
+        } else {
+            // Nếu đã có, chỉ bổ sung những key còn thiếu (dành cho các bản update sau này)
+            $new_settings = wp_parse_args($existing_settings, $defaults);
+            update_option($option_key, $new_settings);
         }
     }
 }

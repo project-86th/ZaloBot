@@ -2,6 +2,8 @@
 
 namespace Inanh86\ZaloBot\Database;
 
+defined('ABSPATH') || exit;
+
 /**
  * Class ClientRepository
  * Quản lý mọi thao tác CRUD với bảng dữ liệu khách hàng Zalo

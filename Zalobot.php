@@ -1,5 +1,8 @@
 <?php
 
+use Inanh86\ZaloBot\Setup\Installer;
+use Inanh86\ZaloBot\Main;
+
 /**
  * Plugin Name: Zalo Bot Workstation
  * Description: Tích hợp giải pháp Zalo Bot cho WordPress.
@@ -8,40 +11,68 @@
  * Text Domain: zalo-bot
  */
 
-// Ngăn chặn truy cập trực tiếp
-if (!defined('ABSPATH')) {
-    exit;
+defined('ABSPATH') || exit;
+
+// 1. Nạp Autoloader
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
 }
 
-// Định nghĩa các hằng số
+// 2. Định nghĩa hằng số
 define('ZALO_BOT_DIR', plugin_dir_path(__FILE__));
 define('ZALO_BOT_URL', plugin_dir_url(__FILE__));
-
-// Nạp Autoloader từ Composer
-if (file_exists(ZALO_BOT_DIR . 'vendor/autoload.php')) {
-    require_once ZALO_BOT_DIR . 'vendor/autoload.php';
-}
+define('ZALO_BOT_SETTING_KEY', 'zalo_bot_settings');
 
 /**
- * Hàm kích hoạt Plugin
+ * 3. Đăng ký Hook kích hoạt
  */
-function activate_zalo_bot_plugin()
-{
-    // Gọi class chuyên xử lý cài đặt
-    if (class_exists('Inanh86\ZaloBot\Setup\Installer')) {
-        Inanh86\ZaloBot\Setup\Installer::activate();
-    }
-}
-// Đăng ký hook khi nhấn "Kích hoạt"
 register_activation_hook(__FILE__, 'activate_zalo_bot_plugin');
 
-/**
- * Khởi tạo Plugin
- */
-function run_zalo_bot_plugin()
+function activate_zalo_bot_plugin()
 {
-    if (class_exists('Inanh86\ZaloBot\Main')) {
-        return new Inanh86\ZaloBot\Main();
+    // Gọi Installer để tạo bảng và Set flag onboarding
+    if (class_exists(Installer::class)) {
+        Installer::activate();
+        // Chắc chắn rằng option này được set tại đây
+        update_option('zalo_bot_needs_onboarding', true);
     }
 }
-add_action('plugins_loaded', 'run_zalo_bot_plugin');
+
+/**
+ * 4. Khởi chạy Plugin
+ */
+add_action('plugins_loaded', function () {
+    if (class_exists(Main::class)) {
+        new Main();
+    }
+});
+
+/**
+ * 5. Xử lý chuyển hướng Onboarding
+ * Dùng hook 'admin_init' là chuẩn nhất
+ */
+add_action('admin_init', function () {
+    // CHỈ chạy nếu có flag và là yêu cầu từ trang admin
+    if (!get_option('zalo_bot_needs_onboarding')) {
+        return;
+    }
+
+    // Nếu đang ở đúng trang cấu hình thì xóa flag để kết thúc chu kỳ redirect
+    if (isset($_GET['page']) && $_GET['page'] === 'zalo-bot-settings') {
+        delete_option('zalo_bot_needs_onboarding');
+        return;
+    }
+
+    global $pagenow;
+    // Chỉ nhảy trang khi người dùng đang ở trang plugins hoặc trang chủ admin
+    if ($pagenow === 'plugins.php' || $pagenow === 'index.php') {
+        // Kiểm tra xem trang Menu đã được đăng ký chưa (tránh redirect vào trang 404)
+        $url = admin_url('admin.php?page=zalo-bot-settings');
+
+        // Quan trọng: Xóa flag TRƯỚC khi redirect để tránh loop nếu có lỗi
+        delete_option('zalo_bot_needs_onboarding');
+
+        wp_safe_redirect($url);
+        exit;
+    }
+});

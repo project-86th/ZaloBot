@@ -1,7 +1,13 @@
 import { useState } from "@wordpress/element";
-import { Button, Dashicon, TextControl } from "@wordpress/components";
+import {
+    Button,
+    Dashicon,
+    ExternalLink,
+    TextControl,
+} from "@wordpress/components";
 import styled from "@emotion/styled";
 import { AdminContainer } from "./Styled";
+import langZaloBot from "../lang/translations";
 
 const StepWrapper = styled.div`
     padding: 40px;
@@ -14,9 +20,13 @@ const StepIcon = styled.div`
     color: #2271b1;
 `;
 
-export const Wizard = ({ onComplete, apiKey, setApiKey }) => {
+/**
+ * component Wizard
+ * * Chạy ngay khi Token Zalo chưa tồn tại
+ *
+ */
+const Wizard = ({ onComplete, apiKey, setApiKey }) => {
     const [currentStep, setCurrentStep] = useState(1);
-
     const nextStep = () => setCurrentStep(currentStep + 1);
 
     return (
@@ -27,11 +37,8 @@ export const Wizard = ({ onComplete, apiKey, setApiKey }) => {
                         <StepIcon>
                             <Dashicon icon="welcome-learn-more" size={48} />
                         </StepIcon>
-                        <h2>Chào mừng bạn đến với Zalo Bot</h2>
-                        <p>
-                            Hãy cùng thiết lập kết nối với Zalo OA của bạn chỉ
-                            trong vài phút.
-                        </p>
+                        <h2>{langZaloBot[14]}</h2>
+                        <p>{langZaloBot[15]}</p>
                         <Button variant="primary" isLarge onClick={nextStep}>
                             Bắt đầu ngay
                         </Button>
@@ -40,10 +47,15 @@ export const Wizard = ({ onComplete, apiKey, setApiKey }) => {
 
                 {currentStep === 2 && (
                     <StepWrapper>
-                        <h2>Bước 1: Lấy Access Token</h2>
+                        <h2>Bước 1: Tạo Zalo Bot</h2>
                         <p>
-                            Truy cập <strong>Zalo Developer Portal</strong>, tạo
-                            ứng dụng và lấy Access Token.
+                            <span>Truy cập</span>
+                            <strong style={{ marginLeft: "5px" }}>
+                                <ExternalLink href="https://zalo.me/s/botcreator/">
+                                    Zalo Botcreator
+                                </ExternalLink>
+                            </strong>
+                            <span>, tạo bot và lấy token.</span>
                         </p>
                         <ul
                             style={{
@@ -51,22 +63,27 @@ export const Wizard = ({ onComplete, apiKey, setApiKey }) => {
                                 display: "inline-block",
                             }}
                         >
-                            <li>1. Tạo App trên Zalo Developers</li>
-                            <li>2. Thêm quyền cho Official Account</li>
-                            <li>3. Copy Access Token dán vào dưới đây</li>
+                            <li>
+                                1. Tạo App trên Zalo Bot Creator( Giao diện tạo
+                                và quản lý Bot trên Mobile, cho phép quản lý
+                                thông tin, cấu hình Bot trực tiếp trên Zalo.)
+                            </li>
+                            <li>2. Copy Access Token dán vào dưới đây</li>
                         </ul>
                         <TextControl
-                            label="Zalo Access Token"
+                            __next40pxDefaultSize={true}
+                            label={langZaloBot[17]}
                             value={apiKey}
                             onChange={setApiKey}
-                            placeholder="Nhập token tại đây..."
+                            placeholder={langZaloBot[18]}
                         />
                         <Button
                             variant="primary"
                             disabled={!apiKey}
                             onClick={nextStep}
+                            __nextHasNoMarginBottom
                         >
-                            Tiếp theo
+                            {langZaloBot[16]}
                         </Button>
                     </StepWrapper>
                 )}
@@ -94,3 +111,5 @@ export const Wizard = ({ onComplete, apiKey, setApiKey }) => {
         </StepWrapper>
     );
 };
+
+export default Wizard;

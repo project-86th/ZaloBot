@@ -1,16 +1,20 @@
-import { StatusBadge } from "./Styled";
+import langZaloBot from "../lang/translations";
+import { HeaderWrapper, StatusBadge, Title } from "./Styled";
+import { Icon } from "@wordpress/components";
 
 export const Header = ({ isEnabled }) => (
-    <div style={{ marginBottom: "20px" }}>
+    <HeaderWrapper>
         <h1 style={{ display: "inline-flex", alignItems: "center" }}>
-            Zalo Bot Configuration
+            <Icon
+                icon="format-chat"
+                style={{ fontSize: "2rem", marginRight: "1rem" }}
+            />
+            <Title>{langZaloBot[0]} (Beta)</Title>
             <StatusBadge active={isEnabled}>
-                {isEnabled ? "Đang hoạt động" : "Tạm dừng"}
+                {isEnabled ? langZaloBot[2] : langZaloBot[3]}
             </StatusBadge>
         </h1>
-        <p className="description">
-            Cấu hình kết nối giữa Website của bạn và Zalo Official Account.
-        </p>
+        <p className="description">{langZaloBot[1]}</p>
         <hr />
-    </div>
+    </HeaderWrapper>
 );

@@ -2,6 +2,8 @@
 
 namespace Inanh86\ZaloBot\Utils;
 
+defined('ABSPATH') || exit;
+
 /**
  * Class Logger
  * Xử lý ghi log nội bộ cho Plugin vào thư mục /dist/logs/

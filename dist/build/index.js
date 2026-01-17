@@ -3360,31 +3360,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Header: () => (/* binding */ Header)
 /* harmony export */ });
-/* harmony import */ var _Styled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Styled */ "./src/Components/Styled.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lang_translations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lang/translations */ "./src/lang/translations.jsx");
+/* harmony import */ var _Styled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Styled */ "./src/Components/Styled.jsx");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
 
 
 const Header = ({
   isEnabled
-}) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-  style: {
-    marginBottom: "20px"
-  },
-  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
+}) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_Styled__WEBPACK_IMPORTED_MODULE_1__.HeaderWrapper, {
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h1", {
     style: {
       display: "inline-flex",
       alignItems: "center"
     },
-    children: ["Zalo Bot Configuration", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_Styled__WEBPACK_IMPORTED_MODULE_0__.StatusBadge, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+      icon: "format-chat",
+      style: {
+        fontSize: "2rem",
+        marginRight: "1rem"
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_Styled__WEBPACK_IMPORTED_MODULE_1__.Title, {
+      children: [_lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][0], " (Beta)"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Styled__WEBPACK_IMPORTED_MODULE_1__.StatusBadge, {
       active: isEnabled,
-      children: isEnabled ? "Đang hoạt động" : "Tạm dừng"
+      children: isEnabled ? _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][2] : _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][3]
     })]
-  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
     className: "description",
-    children: "C\u1EA5u h\xECnh k\u1EBFt n\u1ED1i gi\u1EEFa Website c\u1EE7a b\u1EA1n v\xE0 Zalo Official Account."
-  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {})]
+    children: _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][1]
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {})]
 });
+
+/***/ },
+
+/***/ "./src/Components/Sidebar.jsx"
+/*!************************************!*\
+  !*** ./src/Components/Sidebar.jsx ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SidebarBar: () => (/* binding */ SidebarBar)
+/* harmony export */ });
+/* harmony import */ var _lang_translations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lang/translations */ "./src/lang/translations.jsx");
+/* harmony import */ var _Styled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Styled */ "./src/Components/Styled.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+/**
+ * Component điều hướng Sidebar
+ * @param {string} activeTab - Tab hiện tại đang được chọn
+ * @param {Function} onTabChange - Hàm callback khi người dùng nhấn chuyển Tab
+ */
+
+const SidebarBar = ({
+  activeTab,
+  onTabChange
+}) => {
+  // danh sách menu
+  const menuItems = [{
+    id: "general",
+    label: _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][6],
+    icon: "admin-generic"
+  }, {
+    id: "clients",
+    label: _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][7],
+    icon: "groups"
+  }, {
+    id: "dev-log",
+    label: _lang_translations__WEBPACK_IMPORTED_MODULE_0__["default"][8],
+    icon: "media-text"
+  }];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Styled__WEBPACK_IMPORTED_MODULE_1__.SidebarNav, {
+    children: menuItems.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_Styled__WEBPACK_IMPORTED_MODULE_1__.NavItem, {
+      active: activeTab === item.id,
+      onClick: () => onTabChange(item.id),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: `dashicons dashicons-${item.icon}`
+      }), item.label]
+    }, item.id))
+  });
+};
 
 /***/ },
 
@@ -3398,17 +3461,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AdminContainer: () => (/* binding */ AdminContainer),
 /* harmony export */   CodeBlock: () => (/* binding */ CodeBlock),
-/* harmony export */   StatusBadge: () => (/* binding */ StatusBadge)
+/* harmony export */   ContentArea: () => (/* binding */ ContentArea),
+/* harmony export */   HeaderWrapper: () => (/* binding */ HeaderWrapper),
+/* harmony export */   LayoutBody: () => (/* binding */ LayoutBody),
+/* harmony export */   NavItem: () => (/* binding */ NavItem),
+/* harmony export */   SidebarNav: () => (/* binding */ SidebarNav),
+/* harmony export */   StatusBadge: () => (/* binding */ StatusBadge),
+/* harmony export */   Title: () => (/* binding */ Title)
 /* harmony export */ });
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/emotion-styled.browser.development.esm.js");
 
-const AdminContainer = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
-    max-width: 900px;
-    margin: 20px 20px 0 0;
-    padding: 20px;
+
+// --- layout --- //
+const LayoutBody = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    display: flex;
+    min-height: 600px;
     background: #fff;
-    border: 1px solid #ccd0d4;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin-top: 0;
+    overflow: hidden; /* Để sidebar không bị lòi góc bo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-height: calc(100vh - 150px); /* Thân dashboard cao gần hết màn hình */
+`;
+const ContentArea = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    flex: 1;
+    padding: 25px;
+    background: #ffffff;
+
+    h2 {
+        font-size: 21px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        color: #1d2327;
+    }
+`;
+const AdminContainer = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    margin-left: 0px;
+    padding-right: 10px;
+    margin-top: 10px;
+    background: #f0f0f1;
+`;
+const HeaderWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    background: #fff;
+    padding: 20px 20px 0px;
+    border-bottom: 1px solid #dcdcde;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+
+    h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    p {
+        margin-bottom: 0px;
+    }
 `;
 const CodeBlock = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].code`
     display: block;
@@ -3431,6 +3540,41 @@ const StatusBadge = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].span
     color: ${props => props.active ? "#207b4d" : "#d63638"};
     margin-left: 10px;
 `;
+const Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].span`
+    margin-left: 10px;
+`;
+
+// --- Sidebar Styled Component --- //
+
+const SidebarNav = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    width: 200px;
+    background: #f0f0f1;
+    border-right: 1px solid #c3c4c7;
+`;
+const NavItem = _emotion_styled__WEBPACK_IMPORTED_MODULE_0__["default"].div`
+    padding: 18px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: ${props => props.active ? "#ffffff" : "transparent"};
+    color: ${props => props.active ? "#2271b1" : "#50575e"};
+    border-left: 4px solid
+        ${props => props.active ? "#2271b1" : "transparent"};
+    font-weight: ${props => props.active ? "600" : "500"};
+
+    &:hover {
+        background: #f6f7f7;
+        color: #2271b1;
+    }
+
+    .dashicons {
+        margin-right: 12px;
+        filter: ${props => props.active ? "none" : "grayscale(1)"};
+        opacity: ${props => props.active ? "1" : "0.7"};
+    }
+`;
 
 /***/ },
 
@@ -3447,34 +3591,179 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Styled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Styled */ "./src/Components/Styled.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _lang_translations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lang/translations */ "./src/lang/translations.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
 
 
+
+
+/**
+ * Component hiển thị thông tin Webhook Endpoint.
+ * * Component này cung cấp URL đầy đủ để người dùng copy và dán vào
+ * cấu hình Webhook của Zalo OA tại trang Zalo Developer Portal.
+ * @param {Object} props
+ * @param {string} props.webhookToken - Token bảo mật dùng để định danh và xác thực yêu cầu từ Zalo.
+ */
 
 const WebhookInfo = ({
   webhookToken
 }) => {
+  // Tạo URL Webhook đầy đủ dựa trên tên miền hiện tại của trang WordPress
+  // Endpoint này sẽ được xử lý bởi WebhookController trong PHP
   const webhookUrl = `${window.location.origin}/wp-json/zalo-bot/v1/webhook?token=${webhookToken}`;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
     title: "Th\xF4ng tin Webhook",
-    initialOpen: false,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-      children: ["S\u1EED d\u1EE5ng URL d\u01B0\u1EDBi \u0111\xE2y \u0111\u1EC3 c\u1EA5u h\xECnh trong", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-        children: "Zalo Developer Portal"
-      }), ":"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Styled__WEBPACK_IMPORTED_MODULE_1__.CodeBlock, {
+    initialOpen: true,
+    children: [webhookToken ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Styled__WEBPACK_IMPORTED_MODULE_1__.CodeBlock, {
       children: webhookUrl
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      style: {
+        color: "red"
+      },
+      children: _lang_translations__WEBPACK_IMPORTED_MODULE_2__["default"][10]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
       style: {
         fontSize: "11px",
         color: "#666",
         marginTop: "10px"
       },
-      children: "* L\u01B0u \xFD: Kh\xF4ng chia s\u1EBB URL n\xE0y cho ng\u01B0\u1EDDi l\u1EA1."
+      children: _lang_translations__WEBPACK_IMPORTED_MODULE_2__["default"][9]
     })]
   });
 };
+
+/***/ },
+
+/***/ "./src/Components/Wizard.jsx"
+/*!***********************************!*\
+  !*** ./src/Components/Wizard.jsx ***!
+  \***********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/emotion-styled.browser.development.esm.js");
+/* harmony import */ var _Styled__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Styled */ "./src/Components/Styled.jsx");
+/* harmony import */ var _lang_translations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lang/translations */ "./src/lang/translations.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+const StepWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div`
+    padding: 40px;
+    text-align: center;
+`;
+const StepIcon = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div`
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #2271b1;
+`;
+
+/**
+ * component Wizard
+ * * Chạy ngay khi Token Zalo chưa tồn tại
+ *
+ */
+const Wizard = ({
+  onComplete,
+  apiKey,
+  setApiKey
+}) => {
+  const [currentStep, setCurrentStep] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
+  const nextStep = () => setCurrentStep(currentStep + 1);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(StepWrapper, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_Styled__WEBPACK_IMPORTED_MODULE_3__.AdminContainer, {
+      children: [currentStep === 1 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(StepWrapper, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(StepIcon, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+            icon: "welcome-learn-more",
+            size: 48
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          children: _lang_translations__WEBPACK_IMPORTED_MODULE_4__["default"][14]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+          children: _lang_translations__WEBPACK_IMPORTED_MODULE_4__["default"][15]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+          variant: "primary",
+          isLarge: true,
+          onClick: nextStep,
+          children: "B\u1EAFt \u0111\u1EA7u ngay"
+        })]
+      }), currentStep === 2 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(StepWrapper, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          children: "B\u01B0\u1EDBc 1: T\u1EA1o Zalo Bot"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            children: "Truy c\u1EADp"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("strong", {
+            style: {
+              marginLeft: "5px"
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ExternalLink, {
+              href: "https://zalo.me/s/botcreator/",
+              children: "Zalo Botcreator"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            children: ", t\u1EA1o bot v\xE0 l\u1EA5y token."
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("ul", {
+          style: {
+            textAlign: "left",
+            display: "inline-block"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+            children: "1. T\u1EA1o App tr\xEAn Zalo Bot Creator( Giao di\u1EC7n t\u1EA1o v\xE0 qu\u1EA3n l\xFD Bot tr\xEAn Mobile, cho ph\xE9p qu\u1EA3n l\xFD th\xF4ng tin, c\u1EA5u h\xECnh Bot tr\u1EF1c ti\u1EBFp tr\xEAn Zalo.)"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+            children: "2. Copy Access Token d\xE1n v\xE0o d\u01B0\u1EDBi \u0111\xE2y"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+          __next40pxDefaultSize: true,
+          label: _lang_translations__WEBPACK_IMPORTED_MODULE_4__["default"][17],
+          value: apiKey,
+          onChange: setApiKey,
+          placeholder: _lang_translations__WEBPACK_IMPORTED_MODULE_4__["default"][18]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+          variant: "primary",
+          disabled: !apiKey,
+          onClick: nextStep,
+          __nextHasNoMarginBottom: true,
+          children: _lang_translations__WEBPACK_IMPORTED_MODULE_4__["default"][16]
+        })]
+      }), currentStep === 3 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(StepWrapper, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(StepIcon, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+            icon: "yes-alt",
+            size: 48,
+            style: {
+              color: "#46b450"
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          children: "Tuy\u1EC7t v\u1EDDi! C\u1EA5u h\xECnh ho\xE0n t\u1EA5t"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+          children: "H\u1EC7 th\u1ED1ng \u0111\xE3 s\u1EB5n s\xE0ng. B\u1EA1n c\xF3 th\u1EC3 b\u1EADt Bot v\xE0 b\u1EAFt \u0111\u1EA7u nh\u1EADn tin nh\u1EAFn."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+          variant: "primary",
+          isLarge: true,
+          onClick: onComplete,
+          children: "\u0110i t\u1EDBi b\u1EA3ng \u0111i\u1EC1u khi\u1EC3n"
+        })]
+      })]
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Wizard);
 
 /***/ },
 
@@ -3494,6 +3783,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * Component hiển thị bảng điều khiển trạng thái hoạt động và nhập Token.
+ * @param {Object} props
+ * @param {boolean} props.status - Trạng thái bật/tắt của Bot.
+ * @param {Function} props.setStatus - Hàm cập nhật trạng thái Bot.
+ * @param {string} props.apiKey - Giá trị Access Token hiện tại.
+ * @param {Function} props.setApiKey - Hàm cập nhật Access Token.
+ */
+
 const StatusPanel = ({
   status,
   setStatus,
@@ -3508,14 +3806,87 @@ const StatusPanel = ({
       help: status ? "Bot đang sẵn sàng nhận tin." : "Bot đang tạm dừng.",
       checked: status,
       onChange: () => setStatus(!status)
+      // Bật chế độ không margin-bottom để tuân thủ chuẩn WP 7.0+
+      ,
+      __nextHasNoMarginBottom: true
     })
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    style: {
+      marginTop: "10px"
+    }
   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
     label: "Zalo Access Token",
     value: apiKey,
     onChange: value => setApiKey(value),
     placeholder: "Nh\u1EADp Access Token t\u1EEB Zalo OA..."
+    // Sử dụng kích thước chuẩn mới (40px) của Gutenberg
+    ,
+    __next40pxDefaultSize: true
+    // Xóa margin mặc định để dễ dàng kiểm soát layout bằng CSS/Wrapper
+    ,
+    __nextHasNoMarginBottom: true
   })]
 });
+
+/***/ },
+
+/***/ "./src/lang/translations.jsx"
+/*!***********************************!*\
+  !*** ./src/lang/translations.jsx ***!
+  \***********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/*
+ *
+ *  This file contains all WordPress i18n calls in the plugin javaScript.
+ *  It exists solely so WordPress translation tools can detect strings.
+ */
+
+const langZaloBot = [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cấu hình ZaloBot", "inanh86-zalo-bot"),
+// <-- [0]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cấu hình kết nối giữa Wordpress của bạn và Zalo Official Account.", "inanh86-zalo-bot"),
+// <--[1]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Đang hoạt động", "inanh86-zalo-bot"),
+// <-- [2]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tạm dừng", "inanh86-zalo-bot"),
+// <-- [3]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sử dụng URL dưới đây để cấu hình trong", "inanh86-zalo-bot"),
+// <-- [4]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zalo Developer Portal", "inanh86-zalo-bot"),
+// <-- [5]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quản lý chung", "inanh86-zalo-bot"),
+// <-- [6]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Danh sách chat_id", "inanh86-zalo-bot"),
+// <-- [7]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Log phát triển", "inanh86-zalo-bot"),
+// <-- [8]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("* Lưu ý: Token đính kèm trên URL giúp Bot nhận diện yêu cầu hợp lệ. Không chia sẻ URL này cho người lạ.", "inanh86-zalo-bot"),
+// <-- [9]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vui lòng cấu hình Webhook Token trước.", "inanh86-zalo-bot"),
+// <-- [10]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cập nhật cài đặt", "inanh86-zalo-bot"),
+// <-- [11]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cấu hình hệ thống", "inanh86-zalo-bot"),
+// <-- [12]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lưu thành công!", "inanh86-zalo-bot"),
+// <-- [13]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chào mừng bạn đến với Zalo Bot", "inanh86-zalo-bot"),
+// <-- [14]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(" Hãy cùng thiết lập kết nối với ZaloBot của bạn chỉ trong vài phút.", "inanh86-zalo-bot"),
+// <-- [15]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tiếp theo", "inanh86-zalo-bot"),
+// <-- [16]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zalo Access Token", "inanh86-zalo-bot"),
+// <-- [17]
+(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nhập token tại đây...", "inanh86-zalo-bot") // <-- [18]
+];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (langZaloBot);
 
 /***/ },
 
@@ -3546,6 +3917,16 @@ module.exports = window["wp"]["components"];
 (module) {
 
 module.exports = window["wp"]["element"];
+
+/***/ },
+
+/***/ "@wordpress/i18n"
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+(module) {
+
+module.exports = window["wp"]["i18n"];
 
 /***/ },
 
@@ -3660,8 +4041,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Header */ "./src/Components/Header.jsx");
 /* harmony import */ var _components_StatusPanel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/StatusPanel */ "./src/components/StatusPanel.jsx");
 /* harmony import */ var _Components_WebhookInfo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/WebhookInfo */ "./src/Components/WebhookInfo.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Components_Wizard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/Wizard */ "./src/Components/Wizard.jsx");
+/* harmony import */ var _Components_Sidebar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Components/Sidebar */ "./src/Components/Sidebar.jsx");
+/* harmony import */ var _lang_translations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lang/translations */ "./src/lang/translations.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
 
 
 
@@ -3675,10 +4062,17 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 const Inanh86ZaloBotApp = () => {
+  // Quản lý trạng thái Tab
+  const [activeTab, setActiveTab] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("general");
+
+  // Nếu chưa có API Key thì mặc định coi là lần đầu chạy
+  const [showWizard, setShowWizard] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(!window.zaloBotData.api_key);
   const [status, setStatus] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(window.zaloBotData.status === "on");
   const [apiKey, setApiKey] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(window.zaloBotData.api_key || "");
   const [isSaving, setIsSaving] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [notices, setNotices] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+
+  // Gọi API lưu cài đặt
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -3692,7 +4086,7 @@ const Inanh86ZaloBotApp = () => {
       });
       setNotices([{
         id: Date.now(),
-        content: "Lưu thành công!",
+        content: _lang_translations__WEBPACK_IMPORTED_MODULE_9__["default"][13],
         status: "success"
       }]);
     } catch (err) {
@@ -3705,37 +4099,112 @@ const Inanh86ZaloBotApp = () => {
       setIsSaving(false);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Components_Styled__WEBPACK_IMPORTED_MODULE_3__.AdminContainer, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Header__WEBPACK_IMPORTED_MODULE_4__.Header, {
+
+  // Hàm gọi khi nhấn nút kết thúc ở Wizard
+  const completeOnboarding = async () => {
+    // Loại bỏ khoảng trắng thừa trước khi xử lý
+    const cleanApiKey = apiKey.trim();
+
+    // Lưu lại token ngay khi hoàn thành wizard
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+      path: "/zalo-bot/v1/settings",
+      method: "POST",
+      data: {
+        status: "on",
+        api_key: cleanApiKey
+      }
+    });
+    setStatus(true);
+    setShowWizard(false);
+  };
+  if (showWizard) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Wizard__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      apiKey: apiKey,
+      setApiKey: setApiKey,
+      onComplete: completeOnboarding
+    });
+  }
+
+  // --- Giao diện Dashboard chính với Sidebar ---
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Components_Styled__WEBPACK_IMPORTED_MODULE_3__.AdminContainer, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Header__WEBPACK_IMPORTED_MODULE_4__.Header, {
       isEnabled: status
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SnackbarList, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SnackbarList, {
       notices: notices,
-      onRemove: id => setNotices([])
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_StatusPanel__WEBPACK_IMPORTED_MODULE_5__.StatusPanel, {
-        status: status,
-        setStatus: setStatus,
-        apiKey: apiKey,
-        setApiKey: setApiKey
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_WebhookInfo__WEBPACK_IMPORTED_MODULE_6__.WebhookInfo, {
-        webhookToken: window.zaloBotData.webhook_token
+      onRemove: () => setNotices([])
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Components_Styled__WEBPACK_IMPORTED_MODULE_3__.LayoutBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Sidebar__WEBPACK_IMPORTED_MODULE_8__.SidebarBar, {
+        activeTab: activeTab,
+        onTabChange: id => setActiveTab(id)
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Components_Styled__WEBPACK_IMPORTED_MODULE_3__.ContentArea, {
+        children: [activeTab === "general" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          className: "tab-general",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h2", {
+            style: {
+              marginTop: 0
+            },
+            children: _lang_translations__WEBPACK_IMPORTED_MODULE_9__["default"][12]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_StatusPanel__WEBPACK_IMPORTED_MODULE_5__.StatusPanel, {
+              status: status,
+              setStatus: setStatus,
+              apiKey: apiKey,
+              setApiKey: setApiKey
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_WebhookInfo__WEBPACK_IMPORTED_MODULE_6__.WebhookInfo, {
+              webhookToken: window.zaloBotData.webhook_token
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            style: {
+              marginTop: "20px"
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+              variant: "primary",
+              isBusy: isSaving,
+              onClick: handleSave,
+              __next40pxDefaultSize: true,
+              children: _lang_translations__WEBPACK_IMPORTED_MODULE_9__["default"][11]
+            })
+          })]
+        }), activeTab === "clients" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          className: "tab-clients",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h2", {
+            style: {
+              marginTop: 0
+            },
+            children: "Qu\u1EA3n l\xFD Danh s\xE1ch Chat ID"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+            children: "D\u1EEF li\u1EC7u kh\xE1ch h\xE0ng t\u1EEB Zalo s\u1EBD hi\u1EC3n th\u1ECB t\u1EA1i \u0111\xE2y."
+          })]
+        }), activeTab === "dev-log" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          className: "tab-dev-log",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h2", {
+            style: {
+              marginTop: 0
+            },
+            children: "Nh\u1EADt k\xFD ph\xE1t tri\u1EC3n"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+            children: "Theo d\xF5i qu\xE1 tr\xECnh c\u1EADp nh\u1EADt Plugin c\u1EE7a b\u1EA1n."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+            style: {
+              padding: "15px",
+              background: "#f0f0f1"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("strong", {
+              children: "v1.0.2:"
+            }), " \u0110\xE3 t\xEDch h\u1EE3p Sidebar v\xE0 Layout m\u1EDBi."]
+          })]
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-      style: {
-        marginTop: "20px"
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        variant: "primary",
-        isBusy: isSaving,
-        onClick: handleSave,
-        children: "C\u1EADp nh\u1EADt thay \u0111\u1ED5i"
-      })
     })]
   });
 };
 
 // Render App vào div có id đã tạo ở PHP
-render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Inanh86ZaloBotApp, {}), document.getElementById("zalo-bot-admin-app"));
+const container = document.getElementById("zalo-bot-admin-app");
+if (container) {
+  const root = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createRoot)(container);
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(Inanh86ZaloBotApp, {}));
+}
 })();
 
 /******/ })()
