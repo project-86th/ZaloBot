@@ -23,6 +23,9 @@ class Installer
         // Cấu hình các thông số mặc định ban đầu cho Plugin
         self::add_default_options();
 
+        // Thêm flag đánh dấu cần chạy Onboarding
+        update_option('zalo_bot_needs_onboarding', true);
+
         // Làm mới quy tắc đường dẫn của WordPress (quan trọng nếu có Custom URL)
         flush_rewrite_rules();
     }

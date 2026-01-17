@@ -1,1 +1,37 @@
+# --- WordPress & OS rác ---
+.DS_Store
+Thumbs.db
+*.log
+error_log
+node_modules/
+npm-debug.log*
+
+# --- Composer (Thư viện PHP) ---
+# Không đẩy thư mục vendor lên vì nó sẽ được cài qua 'composer install'
 /vendor/
+
+# --- React & Node (Admin Panel) ---
+# Chỉ đẩy code nguồn (src), không đẩy thư viện node_modules
+/admin/node_modules/
+/admin/dist/
+
+# Nếu bạn dùng wp-scripts, nó sẽ build ra thư mục build/
+# Thường chúng ta SẼ đẩy thư mục build lên để plugin có thể chạy ngay sau khi clone
+# Nhưng nếu bạn có quy trình CI/CD riêng thì có thể ignore nó.
+# /admin/build/
+
+# --- Logs của Plugin ---
+# Giữ lại thư mục logs nhưng không đẩy các file log chi tiết lên
+/dist/logs/*.log
+!/dist/logs/.htaccess
+!/dist/logs/index.php
+
+# --- IDE & Editor ---
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# --- Cấu hình nhạy cảm ---
+# Nếu bạn có lưu thông tin bí mật trong file .env
+.env
