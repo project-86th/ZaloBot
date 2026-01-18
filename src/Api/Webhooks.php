@@ -73,40 +73,53 @@ class WebHooks
     /**
      * Xử lý dữ liệu JSON từ Zalo
      */
-    public function handle_event(WP_REST_Request $request): WP_REST_Response
+    public function handle_event(\WP_REST_Request $request): \WP_REST_Response
     {
-        // Kiểm tra xem Bot có đang được bật không
-        $status = get_option('zalo_bot_status', 'off');
-
-        if ($status !== 'on') {
-            return new \WP_REST_Response([
-                'message' => 'Bot hiện đang tạm dừng hoạt động.'
-            ], 503); // Trả về mã lỗi 503 (Service Unavailable)
-        }
-
+        // Log 1: Nhận request mới
         $data = $request->get_json_params();
 
-        // Lấy chat_id (ID của client đang chat với bot)
-        $zalo_user_id = isset($data['sender']['id']) ? sanitize_text_field($data['sender']['id']) : '';
+        // Logger::debug("Nhận Webhook từ Zalo", $data);
 
-        // Có chat_id thì tiến hành ghi vào database
-        if ($zalo_user_id) {
-            // 1. Lưu vào database (như bài trước)
-            $this->client_repo->save_client($zalo_user_id, $data['message']['text'] ?? '');
+        // 1. Kiểm tra trạng thái Bot
+        $settings = get_option(ZALO_BOT_SETTING_KEY, []);
+        $status = $settings['status'] ?? 'off';
 
-            // 2. Tự động nhắn lại (Auto-reply)
-            $bot_token = get_option('zalo_bot_access_token');
-            if (!empty($bot_token)) {
-                $zalo_api = new ZaloApiService();
-                $zalo_api->send_message(
-                    $bot_token,
-                    $zalo_user_id,
-                    "Bot đã nhận được tin nhắn: " . ($data['message']['text'] ?? '')
-                );
-            }
+        if ($status !== 'on') {
+            Logger::debug("Bot đang tắt (status: {$status}). Dừng xử lý.");
+            return new \WP_REST_Response(['ok' => false], 200);
         }
 
-        // trả kết quả
-        return new \WP_REST_Response(['status' => 'success'], 200);
+        $event_name = $data['event_name'] ?? '';
+
+        // 2. Xử lý sự kiện tin nhắn
+        if ($event_name === 'message.text.received') {
+            $message_obj = $data['message'] ?? [];
+            $from_obj    = $message_obj['from'] ?? [];
+
+            $zalo_user_id = $from_obj['id'] ?? '';
+            $display_name = $from_obj['display_name'] ?? 'Khách hàng';
+            $message_text = $message_obj['text'] ?? '';
+
+            // Logger::debug("Đang xử lý tin nhắn từ: {$display_name} ({$zalo_user_id})", ['nội dung' => $message_text]);
+
+            if ($zalo_user_id) {
+                // Lưu vào database
+                $saved = $this->client_repo->save_client($zalo_user_id, $message_text, $display_name);
+                Logger::debug($saved ? "Lưu Database thành công" : "Lưu Database thất bại");
+
+                // 3. Tự động phản hồi
+                $bot_token = $settings['access_token'] ?? '';
+                if (!empty($bot_token)) {
+                    $zalo_api = new ZaloApiService();
+                    $reply = $zalo_api->send_message($bot_token, $zalo_user_id, "Bot đã nhận: " . $message_text);
+
+                    // Logger::debug("Kết quả gửi tin nhắn phản hồi", $reply);
+                }
+            }
+        } else {
+            Logger::error("Sự kiện không được hỗ trợ: {$event_name}");
+        }
+
+        return new \WP_REST_Response(['ok' => true], 200);
     }
 }
