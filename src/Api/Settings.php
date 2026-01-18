@@ -62,6 +62,7 @@ class Settings
             $webhook_url = get_rest_url(null, 'zalo-bot/v1/webhook');
 
             $zalo_api = new ZaloApiService();
+
             // Truyền token bảo mật là webhook_token trong mảng
             $sync = $zalo_api->set_webhook(
                 $settings['access_token'],

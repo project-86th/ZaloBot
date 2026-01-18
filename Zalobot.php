@@ -1,8 +1,5 @@
 <?php
 
-use Inanh86\ZaloBot\Setup\Installer;
-use Inanh86\ZaloBot\Main;
-
 /**
  * Plugin Name: Zalo Bot Workstation
  * Description: Tích hợp giải pháp Zalo Bot cho WordPress.
@@ -31,8 +28,8 @@ register_activation_hook(__FILE__, 'activate_zalo_bot_plugin');
 function activate_zalo_bot_plugin()
 {
     // Gọi Installer để tạo bảng và Set flag onboarding
-    if (class_exists(Installer::class)) {
-        Installer::activate();
+    if (class_exists(\Inanh86\ZaloBot\Setup\Installer::class)) {
+        \Inanh86\ZaloBot\Setup\Installer::activate();
         // Chắc chắn rằng option này được set tại đây
         update_option('zalo_bot_needs_onboarding', true);
     }
@@ -42,8 +39,8 @@ function activate_zalo_bot_plugin()
  * 4. Khởi chạy Plugin
  */
 add_action('plugins_loaded', function () {
-    if (class_exists(Main::class)) {
-        new Main();
+    if (class_exists(\Inanh86\ZaloBot\Main::class)) {
+        new \Inanh86\ZaloBot\Main();
     }
 });
 
