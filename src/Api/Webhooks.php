@@ -16,10 +16,8 @@ defined('ABSPATH') || exit;
  * Đăng ký một Endpoint REST API để nhận dữ liệu từ Zalo
  * URL sẽ có dạng: yourdomain.com/wp-json/zalo-bot/v1/webhook
  */
-class WebHooks
+class WebHooksController extends BaseController
 {
-
-    protected $namespace = 'zalo-bot/v1';
     protected $rest_base = 'webhook';
     protected $client_repo;
 
@@ -30,44 +28,59 @@ class WebHooks
 
     public function register_routes()
     {
-        register_rest_route($this->namespace, '/' . $this->rest_base, [
-            [
-                'methods'             => WP_REST_Server::CREATABLE, // POST
-                'callback'            => [$this, 'handle_event'],
-                'permission_callback' => [$this, 'validate_token'],
-            ],
-        ]);
+        $this->register_endpoint('/' . $this->rest_base, 'POST', 'handle_event');
     }
 
     /**
      * Kiểm tra token để đảm bảo yêu cầu đến từ Zalo hoặc có quyền
      */
-    public function validate_token(\WP_REST_Request $request): bool|\WP_Error
+    public function check_permission(\WP_REST_Request $request): bool|\WP_Error
     {
-        // 1. Lấy mảng cấu hình tập trung
+        // 1. Lấy cấu hình tập trung
         $settings = get_option(ZALO_BOT_SETTING_KEY, []);
+        $saved_token = $settings['webhook_token'] ?? '';
 
-        // 2. Trích xuất webhook_token từ mảng
-        $saved_token = isset($settings['webhook_token']) ? $settings['webhook_token'] : '';
-
+        // 2. Kiểm tra nếu chưa cài đặt token trong admin
         if (empty($saved_token)) {
-            Logger::error('Webhook chưa được cấu hình token');
-            return new \WP_Error('rest_forbidden', 'Webhook chưa được cấu hình token.', ['status' => 403]);
+            Logger::error('Webhook chưa được cấu hình token trong Settings.');
+            return new \WP_Error(
+                'rest_forbidden',
+                'Dịch vụ chưa sẵn sàng (Thiếu cấu hình).',
+                ['status' => 403]
+            );
         }
 
-        // 3. Lấy token gửi từ Zalo (Ưu tiên Header theo docs, dự phòng Query String)
+        // 3. Lấy token từ Zalo
+        // Header x-bot-api-secret-token được Zalo gửi kèm mỗi event
         $token_from_header = $request->get_header('x-bot-api-secret-token');
+        // Token từ query string dùng để ní test nhanh qua trình duyệt/Postman
         $token_from_query  = $request->get_param('token');
 
-        // 4. So khớp
-        if (
-            (!empty($token_from_header) && hash_equals($saved_token, $token_from_header)) ||
-            (!empty($token_from_query) && hash_equals($saved_token, $token_from_query))
-        ) {
+        // 4. So khớp an toàn với hash_equals
+        $is_valid = false;
+
+        if (!empty($token_from_header) && hash_equals($saved_token, $token_from_header)) {
+            $is_valid = true;
+        } elseif (!empty($token_from_query) && hash_equals($saved_token, $token_from_query)) {
+            $is_valid = true;
+        }
+
+        if ($is_valid) {
             return true;
         }
-        Logger::error('Xác thực Webhook thất bại');
-        return new \WP_Error('rest_forbidden', 'Xác thực Webhook thất bại.', ['status' => 403]);
+
+        // 5. Log lỗi chi tiết để debug khi cần
+        Logger::error([
+            'message' => 'Xác thực Webhook thất bại. Token không khớp.',
+            'received_header' => $token_from_header ? '***' : 'empty',
+            'received_query'  => $token_from_query ? '***' : 'empty'
+        ]);
+
+        return new \WP_Error(
+            'rest_forbidden',
+            'Xác thực Webhook thất bại.',
+            ['status' => 403]
+        );
     }
 
     /**

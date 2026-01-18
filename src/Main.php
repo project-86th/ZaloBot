@@ -64,28 +64,24 @@ class Main
      */
     public function init_rest_api()
     {
-        // Đường dẫn tới thư mục Rest
         $dir = ZALO_BOT_DIR . 'src/Api';
-
-        // Quét tất cả các file .php trong thư mục
         $files = glob($dir . '/*.php');
 
-        if (empty($files)) {
-            return;
-        }
+        if (empty($files)) return;
 
         foreach ($files as $file) {
-            // Lấy tên class từ tên file (ví dụ: WebhookController)
             $class_name = pathinfo($file, PATHINFO_FILENAME);
-
-            // Ghép namespace đầy đủ
             $full_class_name = "\\Inanh86\\ZaloBot\\Api\\" . $class_name;
 
-            // Kiểm tra nếu class tồn tại và có phương thức register_routes
+            // Kiểm tra nếu class tồn tại
             if (class_exists($full_class_name)) {
-                $controller = new $full_class_name();
-
-                if (method_exists($controller, 'register_routes')) {
+                /**
+                 * GIẢI PHÁP TỐI ƯU: 
+                 * Chỉ khởi tạo nếu nó là lớp con của BaseController.
+                 * is_subclass_of sẽ trả về false cho chính BaseController (vì nó không phải con của chính nó).
+                 */
+                if (is_subclass_of($full_class_name, "\\Inanh86\\ZaloBot\\Api\\BaseController")) {
+                    $controller = new $full_class_name();
                     $controller->register_routes();
                 }
             }

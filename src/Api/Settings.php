@@ -6,28 +6,29 @@ use Inanh86\ZaloBot\Services\ZaloApiService;
 use Inanh86\ZaloBot\Utils\Logger;
 use WP_REST_Request;
 use WP_REST_Response;
-use WP_REST_Server;
 
 defined('ABSPATH') || exit;
 
-class Settings
+/**
+ * Controller xử lý các thiết lập của Zalo Bot.
+ * Kế thừa BaseController để sử dụng chung namespace và permission_callback.
+ */
+class SettingsController extends BaseController
 {
 
-    protected $namespace = 'zalo-bot/v1';
     protected $rest_base = 'settings';
 
     /**
-     * Đăng ký các route
+     * Đăng ký các route cho Settings
      */
     public function register_routes()
     {
-        register_rest_route($this->namespace, '/' . $this->rest_base, [
-            [
-                'methods'             => WP_REST_Server::CREATABLE, // Phương thức POST
-                'callback'            => [$this, 'update_settings'],
-                'permission_callback' => [$this, 'get_item_permissions_check'],
-            ],
-        ]);
+        // Sử dụng hàm register_endpoint từ lớp cha
+        // Route: wp-json/zalo-bot/v1/settings
+        $this->register_endpoint('/' . $this->rest_base, 'POST', 'update_settings');
+
+        // Ní có thể đăng ký thêm route lấy settings (GET) dễ dàng:
+        $this->register_endpoint('/' . $this->rest_base, 'GET', 'get_settings');
     }
 
     /**
@@ -85,10 +86,11 @@ class Settings
     }
 
     /**
-     * Kiểm tra quyền truy cập: Chỉ admin mới được lưu
+     * Lấy cấu hình Plugin
      */
-    public function get_item_permissions_check($request)
+    public function get_settings($request)
     {
-        return current_user_can('manage_options');
+        $settings = get_option(ZALO_BOT_SETTING_KEY, []);
+        return new \WP_REST_Response($settings, 200);
     }
 }
