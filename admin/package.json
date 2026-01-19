@@ -14,6 +14,8 @@
     "license": "ISC",
     "type": "commonjs",
     "devDependencies": {
+        "@emotion/babel-plugin": "^11.13.5",
+        "@wordpress/babel-preset-default": "^8.38.0",
         "@wordpress/scripts": "^31.3.0"
     },
     "dependencies": {

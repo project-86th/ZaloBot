@@ -16,7 +16,7 @@ defined('ABSPATH') || exit;
  * Đăng ký một Endpoint REST API để nhận dữ liệu từ Zalo
  * URL sẽ có dạng: yourdomain.com/wp-json/zalo-bot/v1/webhook
  */
-class WebHooksController extends BaseController
+class WebHooks extends BaseController
 {
     protected $rest_base = 'webhook';
     protected $client_repo;

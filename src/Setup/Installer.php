@@ -39,29 +39,29 @@ class Installer
      * Sử dụng hàm dbDelta để đảm bảo không làm mất dữ liệu khi cập nhật cấu trúc bảng.
      * @return void
      */
-    private static function create_table(): void
+    public static function create_table()
     {
         global $wpdb;
-
-        // Định nghĩa tên bảng kèm tiền tố (ví dụ: wp_zalo_clients)
         $table_name = $wpdb->prefix . 'zalo_clients';
         $charset_collate = $wpdb->get_charset_collate();
 
-        // Câu lệnh SQL tạo bảng theo chuẩn WordPress
+        /**
+         * LƯU Ý QUAN TRỌNG CHO dbDelta:
+         * - Không đặt DEFAULT cho cột TEXT (last_message).
+         * - Phải có 2 khoảng trắng giữa PRIMARY KEY và định nghĩa.
+         * - Mỗi cột nên nằm trên 1 dòng.
+         */
         $sql = "CREATE TABLE $table_name (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
-            zalo_user_id varchar(100) NOT NULL,    /* ID định danh duy nhất từ Zalo */
-            display_name varchar(255) DEFAULT '',  /* Tên hiển thị của khách hàng */
-            last_message text DEFAULT '',          /* Nội dung tin nhắn cuối cùng */
-            last_active datetime DEFAULT CURRENT_TIMESTAMP, /* Thời gian tương tác cuối */
-            PRIMARY KEY  (id),
-            UNIQUE KEY zalo_user_id (zalo_user_id) /* Ngăn chặn trùng lặp User ID */
-        ) $charset_collate;";
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        zalo_user_id varchar(100) NOT NULL,
+        display_name varchar(255) DEFAULT '',
+        last_message text,
+        last_active datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        PRIMARY KEY  (id),
+        UNIQUE KEY zalo_user_id (zalo_user_id)
+    ) $charset_collate;";
 
-        // Nạp thư viện cần thiết để chạy hàm dbDelta
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-        // Thực thi tạo hoặc cập nhật bảng
         dbDelta($sql);
     }
 

@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "@wordpress/babel-preset-default"
+  ],
+  "plugins": [
+    [
+      "@emotion/babel-plugin",
+      {
+        "sourceMap": false,
+        "autoLabel": "never",
+        "cssPropOptimization": true
+      }
+    ]
+  ]
+}

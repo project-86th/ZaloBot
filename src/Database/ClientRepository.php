@@ -53,27 +53,41 @@ class ClientRepository
          ON DUPLICATE KEY UPDATE 
          last_message = VALUES(last_message), 
          last_active = VALUES(last_active),
-         display_name = IF(VALUES(display_name) != '', VALUES(display_name), display_name)",
+         display_name = CASE 
+            WHEN VALUES(display_name) != '' THEN VALUES(display_name) 
+            ELSE display_name 
+         END",
             $user_id,
             $message,
             $display_name,
-            current_time('mysql') // Lấy thời gian hiện tại theo múi giờ của WordPress
+            current_time('mysql')
         ));
     }
 
     /**
-     * Lấy danh sách tất cả khách hàng đã từng nhắn tin
+     * Lấy danh sách khách hàng có phân trang và tổng số lượng
      */
     public function get_all_clients($limit = 20, $offset = 0)
     {
         global $wpdb;
         $table = self::get_table_name();
 
-        return $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM $table ORDER BY last_active DESC LIMIT %d OFFSET %d",
+        // 1. Sử dụng SQL_CALC_FOUND_ROWS để lấy data và đếm tổng trong 1 lần truy vấn (tối ưu hiệu suất)
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT SQL_CALC_FOUND_ROWS * FROM $table ORDER BY last_active DESC LIMIT %d OFFSET %d",
             $limit,
             $offset
         ));
+
+        // 2. Lấy tổng số dòng (không bị ảnh hưởng bởi LIMIT)
+        $total_count = $wpdb->get_var("SELECT FOUND_ROWS()");
+
+        return [
+            'items' => $results,
+            'total' => (int) $total_count,
+            'limit' => (int) $limit,
+            'offset' => (int) $offset
+        ];
     }
 
     /**

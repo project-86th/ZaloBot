@@ -67,22 +67,32 @@ class Main
         $dir = ZALO_BOT_DIR . 'src/Api';
         $files = glob($dir . '/*.php');
 
-        if (empty($files)) return;
+        if (empty($files)) {
+            return;
+        }
 
         foreach ($files as $file) {
             $class_name = pathinfo($file, PATHINFO_FILENAME);
             $full_class_name = "\\Inanh86\\ZaloBot\\Api\\" . $class_name;
 
-            // Kiểm tra nếu class tồn tại
+            // Kiểm tra class tồn tại trước khi dùng Reflection
             if (class_exists($full_class_name)) {
-                /**
-                 * GIẢI PHÁP TỐI ƯU: 
-                 * Chỉ khởi tạo nếu nó là lớp con của BaseController.
-                 * is_subclass_of sẽ trả về false cho chính BaseController (vì nó không phải con của chính nó).
-                 */
-                if (is_subclass_of($full_class_name, "\\Inanh86\\ZaloBot\\Api\\BaseController")) {
-                    $controller = new $full_class_name();
-                    $controller->register_routes();
+                try {
+                    $reflection = new \ReflectionClass($full_class_name);
+
+                    // CHỈ KHỞI TẠO NẾU:
+                    // 1. Class không phải là abstract (bỏ qua BaseController và Interface)
+                    // 2. Class có thực thi RouteInterface
+                    if (!$reflection->isAbstract() && $reflection->implementsInterface("\\Inanh86\\ZaloBot\\Api\\RouteInterface")) {
+                        $controller = $reflection->newInstance();
+                        $controller->register_routes();
+                    }
+                } catch (\ReflectionException $e) {
+                    // Nếu có lỗi trong quá trình quét, log lại để debug
+                    if (class_exists('Inanh86\\ZaloBot\\Utils\\Logger')) {
+                        \Inanh86\ZaloBot\Utils\Logger::debug("Lỗi quét API: " . $e->getMessage());
+                    }
+                    continue;
                 }
             }
         }

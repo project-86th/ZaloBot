@@ -8,6 +8,7 @@ import { WebhookInfo } from "./Components/WebhookInfo";
 import Wizard from "./Components/Wizard";
 import { SidebarBar } from "./Components/Sidebar";
 import langZaloBot from "./lang/translations";
+import ChatIDManager from "./Components/ChatIDManager";
 
 /**
  * Khai báo ZaloBotApp
@@ -124,10 +125,8 @@ const Inanh86ZaloBotApp = () => {
                             <h2 style={{ marginTop: 0 }}>
                                 Quản lý Danh sách Chat ID
                             </h2>
-                            <p>
-                                Dữ liệu khách hàng từ Zalo sẽ hiển thị tại đây.
-                            </p>
-                            {/* Bạn sẽ chèn Component bảng Table ở đây */}
+                            {/* Lấy danh sách Chat_ID(Đã follow bot của ta) */}
+                            <ChatIDManager />
                         </div>
                     )}
 

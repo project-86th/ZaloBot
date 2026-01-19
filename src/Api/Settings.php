@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
  * Controller xử lý các thiết lập của Zalo Bot.
  * Kế thừa BaseController để sử dụng chung namespace và permission_callback.
  */
-class SettingsController extends BaseController
+class Settings extends BaseController
 {
 
     protected $rest_base = 'settings';

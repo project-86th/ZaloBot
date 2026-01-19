@@ -6,7 +6,7 @@ namespace Inanh86\ZaloBot\Api;
  * Base Controller cho hệ thống REST API của Zalo Bot.
  * Cung cấp cơ chế kiểm tra quyền hạn và đăng ký route dùng chung.
  */
-abstract class BaseController extends \WP_REST_Controller
+abstract class BaseController extends \WP_REST_Controller implements RouteInterface
 {
 
     protected $namespace = 'zalo-bot/v1';
@@ -52,5 +52,5 @@ abstract class BaseController extends \WP_REST_Controller
     /**
      * Bắt buộc các lớp con phải tự định nghĩa các Route của riêng mình.
      */
-    abstract public function register_routes();
+    // abstract public function register_routes();
 }

@@ -6,6 +6,7 @@ const path = require("path");
 
 module.exports = {
     ...defaultConfig, // Kế thừa toàn bộ cấu hình mặc định
+    // mode: "production", // <-- Chế độ Dev | Prod
 
     // Cấu hình đầu vào và đầu ra
     entry: {
@@ -27,6 +28,21 @@ module.exports = {
             "@components": path.resolve(process.cwd(), "src/components"),
         },
         extensions: [".js", ".jsx", ".json"],
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/, // Đảm bảo có đuôi .jsx ở đây
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@wordpress/babel-preset-default"],
+                    },
+                },
+            },
+        ],
     },
 
     // Plugins bổ sung (nếu cần)
